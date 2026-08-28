@@ -1,0 +1,25 @@
+# Build Directories
+build/
+build-*/
+ninja/
+ninja*/
+compile_commands.json
+
+# Compiled Files
+*.o
+*.a
+*.so
+*.out
+
+# Debugging
+*.gdb
+*.dSYM/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp Files
+*.tmp
+*.swp
+*~
