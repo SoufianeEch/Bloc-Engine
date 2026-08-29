@@ -16,12 +16,14 @@ It must support:
 
 # Vector2 Design
 
-- Data memebers
+## Data memebers
   - float x
   - float y
-- Constructor
+
+## Constructor
   - Vector2(float x = 0, float y = 0)
-- Operator & Methods
+
+## Operator & Methods
   - Addition
     - Vector2 operator+(const Vector& other) const;
     - Usage: `v1 + v2`

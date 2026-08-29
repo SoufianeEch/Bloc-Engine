@@ -14,21 +14,12 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SFML)
 
-# Engine source files
-set(ENGINE_SOURCES
-  src/main.cpp
-  src/Application.cpp
-  src/Math/Vector2.cpp
-)
+# Collect automaticly all the source and header files
+file(GLOB_RECURSE ENGINE_SOURCES "src/*.cpp")
+file(GLOB_RECURSE ENGINE_HEADERS "includes/*.hpp")
 
-# Engine headers
-set(ENGINE_HEADERS
-  includes/Application.hpp
-  includes/Math/Vector2.hpp
-)
-
-# Main Executable "the engine"
-add_executable(BBlocEngine ${ENGINE_SOURCES})
+# Target configuration
+add_executable(BBlocEngine ${ENGINE_SOURCES} ${ENGINE_HEADERS})
 target_include_directories(BBlocEngine PRIVATE includes)
 target_link_libraries(BBlocEngine PRIVATE sfml-graphics sfml-window sfml-system)
 
@@ -49,3 +40,18 @@ target_compile_options(Vector2Tests PRIVATE
 )
 enable_testing()
 add_test(NAME Vector2Tests COMMAND Vector2Tests)
+
+# == Shape Tests ==
+add_executable(ShapeTests tests/Shapes/ShapeTests.cpp 
+    src/Math/Vector2.cpp
+    src/Shapes/Shape.cpp
+    src/Shapes/Circle.cpp
+    src/Shapes/Rectangle.cpp
+    src/Shapes/Triangle.cpp
+    src/Shapes/Line.cpp
+)
+target_include_directories(ShapeTests PRIVATE includes)
+target_link_libraries(ShapeTests PRIVATE sfml-graphics sfml-window sfml-system)
+target_compile_options(ShapeTests PRIVATE -Wall -Wextra -Wpedantic)
+
+add_test(NAME ShapeTests COMMAND ShapeTests)
