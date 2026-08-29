@@ -3,7 +3,6 @@ project(BBlocEngine VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Download SFML auto
@@ -15,16 +14,38 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SFML)
 
-# Add source files
-add_executable(BBlocEngine src/main.cpp src/Application.cpp)
+# Engine source files
+set(ENGINE_SOURCES
+  src/main.cpp
+  src/Application.cpp
+  src/Math/Vector2.cpp
+)
 
+# Engine headers
+set(ENGINE_HEADERS
+  includes/Application.hpp
+  includes/Math/Vector2.hpp
+)
+
+# Main Executable "the engine"
+add_executable(BBlocEngine ${ENGINE_SOURCES})
 target_include_directories(BBlocEngine PRIVATE includes)
-
-# 3. Link SFML graphics and window modules
 target_link_libraries(BBlocEngine PRIVATE sfml-graphics sfml-window sfml-system)
+
 # 4. Include all the warrning flags
 target_compile_options(BBlocEngine PRIVATE
   -Wall
   -Wextra
   -Wpedantic
 )
+
+# == TEST EXECUTABLE ==
+add_executable(Vector2Tests tests/Math/Vector2Tests.cpp src/Math/Vector2.cpp)
+target_include_directories(Vector2Tests PRIVATE includes)
+target_compile_options(Vector2Tests PRIVATE
+  -Wall
+  -Wextra
+  -Wpedantic
+)
+enable_testing()
+add_test(NAME Vector2Tests COMMAND Vector2Tests)
