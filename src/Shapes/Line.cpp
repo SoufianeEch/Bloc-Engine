@@ -10,17 +10,15 @@ namespace BBloc {
     : Shape(startPoint), endPoint(endPoint), thickness(thickness) {}
 
   void Line::Render(sf::RenderWindow& window) {
-    sf::RectangleShape line(sf::Vector2f(GetLength(), thickness));
-    line.setPosition(position.x, position.y);
-
-    // Calulate angle
-    Vector2 direction = endPoint - position;
-    float angle = std::atan2(direction.y, direction.x) * 180.0f / 3.13159f;
-    line.setRotation(angle);
-
-    line.setFillColor(sf::Color::Green);
-
-    // window reference for rendering
+      sf::RectangleShape line(sf::Vector2f((endPoint - position).Length(), thickness));
+      line.setPosition(position.x, position.y);
+      
+      Vector2 direction = endPoint - position;
+      float angle = std::atan2(direction.y, direction.x) * 180.0f / 3.14159f;
+      line.setRotation(angle);
+      
+      line.setFillColor(sf::Color::White);
+      window.draw(line);
   }
 
   Vector2 Line::GetBounds() const {

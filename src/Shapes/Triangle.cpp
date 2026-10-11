@@ -10,16 +10,15 @@ namespace BBloc {
       points[2] = p3;
     }
 
-  void Triangle::Render(sf::RenderWindow& window) {
-    sf::ConvexShape triangle(3);
-    for (int i = 0; i < 3; ++i) {
-      triangle.setPoint(i, sf::Vector2f(points[i].x * scale, points[i].y * scale));
+    void Triangle::Render(sf::RenderWindow& window) {
+        sf::ConvexShape triangle(3);
+        for (int i = 0; i < 3; ++i) {
+            triangle.setPoint(i, sf::Vector2f(points[i].x * scale, points[i].y * scale));
+        }
+        triangle.setPosition(position.x, position.y);
+        triangle.setFillColor(sf::Color::White);
+        window.draw(triangle);
     }
-    triangle.setPosition(position.x, position.y);
-    triangle.setFillColor(sf::Color::Red);
-
-    // window reference for rendering
-  }
 
   Vector2 Triangle::GetBounds() const {
     // Find max x and y for all three points
